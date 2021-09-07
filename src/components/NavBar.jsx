@@ -2,8 +2,6 @@ import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import CartWidget from './CartWidget'
-import NavbarCollapse from 'react-bootstrap/esm/NavbarCollapse'
-import { NavDropdown } from 'react-bootstrap'
 
 function NavBar(){
     return (
