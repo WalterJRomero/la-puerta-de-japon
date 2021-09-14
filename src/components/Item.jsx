@@ -9,8 +9,8 @@ function Item({item}) {
             <Card.Header className="fw-bold">{title}</Card.Header>
             <Card.Body>
                 <Card.Img variant="top" src={pictureUrl} />
-                {/* <Card.Title>{description}</Card.Title> */}
-                <Card.Text>Precio u$s: {price}</Card.Text>
+                <Card.Title>{description}</Card.Title>
+                <Card.Text>Precio u$s: {price}</Card.Text>                
                 <ButtonGroup aria-label="Basic example">
                     <Button variant="secondary" >Detalles</Button>                        
                 </ButtonGroup>
