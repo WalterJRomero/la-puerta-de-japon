@@ -6,7 +6,7 @@ import CartWidget from './CartWidget'
 function NavBar(){
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg">
+            <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-end">
                 <Container>
                     <Nav.Link href="/">
                         <Navbar.Brand>La puerta de Japón</Navbar.Brand>
@@ -20,10 +20,8 @@ function NavBar(){
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-                <Nav.Link href="/cart">
-                    <Container  className="d-flex justify-content-end m-1">
-                        <CartWidget />
-                    </Container> 
+                <Nav.Link href="/cart" >
+                    <CartWidget />                    
                 </Nav.Link>
             </Navbar>
         </>
