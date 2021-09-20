@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+-Proyecto Ecommerce, Coderhouse Camada 16935
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+-Alumno: Walter Romero
 
-## Available Scripts
+-Descripción: Esta pagína se diseño con la tematíca de venta de servicios y productos sobre Japón. Se continuó el tema elegido en los cursos anteriores de Desarrollo Web y Javascript ( https://walterjromero.github.io/La_puerta_de_Japon/ ). 
 
-In the project directory, you can run:
+-Utils/mock: se generó una pequeña base de datos para poder utilizarla en las diferentes categorías. Se añade una descripción corta para que sea previsualizada en el itemlistcontainer, luego se añadirá una descripción mas extensa para poder mostrarla en "detalle". Se crea la función getFetch para generar la promesa y poder devolver los valores del array, con setTimeOut se retrasa 2 segundos la carga.
 
-### `npm start`
+-Componentes
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+NavBar: se renderiza junto a CartWidget, es la barra de navegacion del sitio. Utiliza React Bootstrap
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+CartWidget: botón con la imagen de un carrito, se utilizó react-icons para que renderice el carrito elegido "io5"
 
-### `npm test`
+Item: recibe por prop un objeto item, luego hago destructuring para poder utilizarlo de forma mas sencilla en la "card" que genere para renderizarlo. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ItemCount: este componente recibe por prop un valor de stock, al momento de intentar superar ese stock no se lo permite al usuario.
 
-### `npm run build`
+ItemDetail: utilicé los componentes de react-bootstrap para renderizar los detalles. se agrega el itemcount en el cuerpo del detalle para que se visualice los botones de - o + y agregar al carrito.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ItemDetailContainer: con useParams se toma el valor del item que se esta intentando buscar. Luego con useffect se analiza la base de datos ficticia cargada en mock, comparando el item obtenido con params, si tenemos un valor definido lo buscamos dentro del array mock utilizando un filter, luego lo seteamos con setUnItem (guarda el valor del item buscado como un objeto), en caso de no encontrar el item que nos solicitaron, devuelve todo el array de esa categoria. Se comprueba tambien que de existir el item que estan solicitando se renderice correctamente a travez de ItemDetail. Si no existe no renderiza un objeto indefinido.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+ItemList: Es un contendor de items. Por medio de una prop items, se renderizan todos los objetos que se pasan al componente Item. En este caso mostrará todos los items encontrados de una categoria.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+ItemListContainer: componente contenedor de todas las categorias, si necesitamos encontrar una categoria en especial la obtenemos por medio de useParams, el valor lo pasamos desde app.js por "/categoria/:idCategoria". Se simula una espera de 2 segundos, mientras se visualiza la leyenda "por favor espere". Si no tenemos una categoria que buscar el contenedor devuelve/muestra todos los item dentro de la base de datos.
 
-### `npm run eject`
+TituloCategorias: se muestra como titulo h2 la categoria que es capturada por useParams, la categoria se obtiene desde "/categoria/:idCategoria" en app.js
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-Estilos:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+item.css:se genero un estilo para que las fotos tengan la misma altura en la vista de categorias

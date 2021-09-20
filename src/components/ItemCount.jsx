@@ -23,16 +23,17 @@ function ItemCount({stock, initial, onAdd}) {
     }
 
     return (
-    <>
-        <Card.Body>                 
-            <Card.Text>{contador}</Card.Text>
-            <ButtonGroup aria-label="Basic example">
-                <Button variant="secondary" onClick={remCount}>-</Button>
-                <Button variant="secondary" onClick={agregarCarrito}>Agregar al carrito</Button>
-                <Button variant="secondary" onClick={addCount}>+</Button>
-            </ButtonGroup>
-        </Card.Body>
-    </>
+        <>
+            <Card.Body>                 
+                <Card.Text>Cantidad: {contador}</Card.Text>
+                <Card.Text>Stock: {stock}</Card.Text>
+                <ButtonGroup aria-label="Basic example">
+                    <Button variant="secondary" onClick={remCount}>-</Button>
+                    <Button variant="secondary" onClick={agregarCarrito}>Agregar al carrito</Button>
+                    <Button variant="secondary" onClick={addCount}>+</Button>
+                </ButtonGroup>
+            </Card.Body>
+        </>
     )
 }
 

@@ -1,21 +1,25 @@
-import {Card, ButtonGroup, Button} from "react-bootstrap"
+import {Card} from "react-bootstrap"
+import ItemCount from "./ItemCount"
 
 function ItemDetail({item}) {
 
+    const onAdd =(cant)=>{
+        console.log(cant)
+    }
+     
     return (
-    <>       
-        <Card border="danger" className="m-5" key={item.id} style={{width:'18rem'}}>
-            <Card.Header className="fw-bold">{item.title}</Card.Header>
-            <Card.Body>
-                <Card.Img variant="top" src={item.pictureUrl} />
-                <Card.Title>{item.description}</Card.Title>
-                <Card.Text>Precio u$s: {item.price}</Card.Text>                
-                <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary" >Detalles</Button>                        
-                </ButtonGroup>
-            </Card.Body>
-        </Card>            
-    </>
+        <>       
+            <h1 className='text-danger'>Detalles del producto</h1> 
+            <Card border="danger" className="m-5" key={item.id} style={{width:'18rem'}}>              
+                <Card.Header className="fw-bold">{item.title}</Card.Header>
+                <Card.Body>
+                    <Card.Img variant="top" src={item.pictureUrl} />
+                    <Card.Title>{item.shortDescription}</Card.Title>
+                    <Card.Text>Precio u$s: {item.price}</Card.Text>     
+                    <ItemCount stock={5} initial={1} onAdd={onAdd}/>                
+                </Card.Body>
+            </Card>            
+        </>
     )
 }
 
