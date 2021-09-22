@@ -14,9 +14,9 @@ function NavBar(){
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link href="/categoria/paquetes">Paquetes de viajes</Nav.Link>
-                            <Nav.Link href="/categoria/excursiones">Excursiones</Nav.Link>
-                            <Nav.Link href="/categoria/pases">Pases de Transporte</Nav.Link>                       
+                            <Nav.Link href="/category/paquetes">Paquetes de viajes</Nav.Link>
+                            <Nav.Link href="/category/excursiones">Excursiones</Nav.Link>
+                            <Nav.Link href="/category/pases">Pases de Transporte</Nav.Link>                       
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

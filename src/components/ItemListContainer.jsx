@@ -26,7 +26,7 @@ function ItemListContainer({greeting}) {
 
     return (
         <>
-            <h1 className='text-danger'>{greeting}</h1> 
+            <h1 className='text-danger m-3'>{greeting}</h1> 
             {loading ?  
                     <Button variant="danger" disabled>
                         <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>Por favor espere...

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button'
 
 function ItemCount({stock, initial, onAdd}) {
     const [contador,setContador]= useState(initial)
+    const [btnAdd,setBtnAdd] = useState(true)
 
     function addCount() {
         if (contador<stock){
@@ -20,17 +21,28 @@ function ItemCount({stock, initial, onAdd}) {
 
     const agregarCarrito=()=>{
         onAdd(contador)
+        setBtnAdd(false)
+
     }
 
     return (
         <>
             <Card.Body>                 
-                <Card.Text>Cantidad: {contador}</Card.Text>
-                <Card.Text>Stock: {stock}</Card.Text>
+                <Card.Text className="fw-bold">Cantidad:{contador}</Card.Text>
+                <Card.Text className="text-secondary">Unidades disponibles: {stock}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
-                    <Button variant="secondary" onClick={remCount}>-</Button>
-                    <Button variant="secondary" onClick={agregarCarrito}>Agregar al carrito</Button>
-                    <Button variant="secondary" onClick={addCount}>+</Button>
+                    {btnAdd?
+                        <>
+                            <Button variant="secondary" onClick={remCount}>-</Button>
+                            <Button variant="secondary" onClick={agregarCarrito}>Agregar al carrito</Button>
+                            <Button variant="secondary" onClick={addCount}>+</Button>                       
+                        </>
+                        :    
+                        <>
+                            <Button variant="primary" href={`/`}>Seguir comprando</Button>        
+                            <Button variant="success" href={`/cart`}>Terminar Compra</Button>
+                        </>                   
+                    }
                 </ButtonGroup>
             </Card.Body>
         </>

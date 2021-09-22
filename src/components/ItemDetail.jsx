@@ -6,10 +6,12 @@ function ItemDetail({item}) {
     const onAdd =(cant)=>{
         console.log(cant)
     }
+
+    // aca va la logica del onADD
      
     return (
         <>       
-            <h1 className='text-danger'>Detalles del producto</h1> 
+            <h1 className='text-danger m-3' >Conoce mas</h1> 
             <Container className="container d-flex justify-content-center align-item-center h-100 ">
                 <Row className="justify-content-center">
                     <Card border="danger" className="m-5" key={item.id} style={{width:'20rem'}}>              
