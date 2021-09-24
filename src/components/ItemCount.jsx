@@ -4,6 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 
 function ItemCount({stock, initial, onAdd}) {
+    
     const [contador,setContador]= useState(initial)
     const [btnAdd,setBtnAdd] = useState(true)
 

@@ -5,7 +5,8 @@ import ItemList from "./ItemList"
 import {getFetch} from "../utils/mock"
 import {useParams} from "react-router-dom"
 
-function ItemListContainer({greeting}) {    
+function ItemListContainer({greeting}) {
+        
     const [productos,setProductos] =useState([])
     const [loading,setLoading]=useState(true) 
     const {idCategoria}  = useParams()    

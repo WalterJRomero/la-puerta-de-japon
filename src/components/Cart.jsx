@@ -1,6 +1,7 @@
 import React from 'react'
 
 function Cart() {
+    
     return (
         <>
             <h1>Componente Cart</h1>

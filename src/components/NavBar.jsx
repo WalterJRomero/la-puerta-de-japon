@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import CartWidget from './CartWidget'
 
 function NavBar(){
+    
     return (
         <>
             <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-end">
