@@ -31,7 +31,6 @@ function ItemDetailContainer() {
                     <Button variant="primary" disabled className="m-2 p-2">
                         <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>Cargando detalles
                     </Button>: 
-                
                     unItem && <ItemDetail key={unItem.id} item={unItem}/>                 
             }           
         </>

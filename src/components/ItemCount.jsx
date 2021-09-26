@@ -2,6 +2,7 @@ import { useState } from "react"
 import Card from 'react-bootstrap/Card'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
+import {Link} from "react-router-dom"
 
 function ItemCount({stock, initial, onAdd}) {
     
@@ -40,8 +41,8 @@ function ItemCount({stock, initial, onAdd}) {
                         </>
                         :    
                         <>
-                            <Button variant="primary" href={`/`}>Seguir comprando</Button>        
-                            <Button variant="success" href={`/cart`}>Terminar Compra</Button>
+                            <Button variant="primary" as={Link} to ={`/`}>Seguir comprando</Button>        
+                            <Button variant="success" as={Link} to ={`/cart`}>Terminar Compra</Button>
                         </>                   
                     }
                 </ButtonGroup>

@@ -129,3 +129,5 @@ const unoSolo = datos.filter((producto)=>producto.id===1);
     export const getUnoFetch = new Promise((resolve,reject) =>{
             setTimeout(()=>resolve(unoSolo),2000)        
         })  
+
+export const cartEmptyImg = 'https://i.postimg.cc/G2hshRLx/carrito-Vacio.png'

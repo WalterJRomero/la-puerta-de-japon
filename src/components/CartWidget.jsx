@@ -5,8 +5,8 @@ function CartWidget() {
     
     return (
         <>
-            <Button variant="danger">
-                <IoCartOutline  className="h4"/>
+            <Button variant="success" >
+                <IoCartOutline className='h4'/>
             </Button>                  
         </>
     )

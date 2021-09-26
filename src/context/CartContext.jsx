@@ -1,63 +1,46 @@
-// import {useState,createContext,useContext} from 'react'
+import {useState,createContext, useContext} from 'react'
 
-// const cartContext = createContext([])
+const cartContext = createContext([])
 
-// export const useCartContext = ()=>useContext(cartContext)
+export const useCartContext = () => useContext(cartContext)
 
-// function CartContextProvider({children}) {
+export default function CartContextProvider({children}){
 
-//     const [cartList, setCartList] = useState([])
+    const [cartList,setCartList] = useState([])    
 
-//     function addToCart(item){
-//         setCartList([...cartList,item])
-//     }
+    function addToCart({cartItem,quantity}){     
+       
+        let itemFindIndex = []        
+        itemFindIndex = cartList.findIndex(itemToAdd=>cartItem.id === itemToAdd.cartItem.id); 
+        if (itemFindIndex === -1){
+            setCartList(cartList=>[...cartList,{cartItem,quantity}])
+        } else {
+            let newCart=[...cartList];          
+            newCart[itemFindIndex].quantity += quantity;
+            setCartList(newCart)
+        }        
+    }
+    
+    function clearCart(){       
+        setCartList([])
+        
+    }         
 
-//     function clearCart() {
-//         setCartList([])        
-//     }
+    function removeItem(id){
 
-//     console.log(cartList)
-
-//     return (
-//         <cartContext.Provider value={{
-//             cartList,
-//             addToCart,
-//             clearCart
-//         }}>
-//             {children}            
-//         </cartContext.Provider>
-//     )
-// }
-
-// export default CartContextProvider
-
-import {useState, createContext, useContext} from 'react'
-
-const cartContext= createContext([])
-
-export const useCartContext = () => useContext(cartContext) 
-
-
-export default function CartContextProvider ({children}) {
-    const [carList, setCarList] = useState([])
-
-    function addToCart(item) {
-        setCarList([...carList, item])
+        let itemFind=[]
+        itemFind = cartList.filter((cartItem) => cartItem.cartItem.id !== id)
+        setCartList(itemFind)      
     }
 
-    function borrarLista() {
-        carList([])
-    }
-
-    console.log(carList)
-    return(
+    return (
         <cartContext.Provider value={{
-            carList,
+            cartList,
             addToCart,
-            borrarLista
+            clearCart,
+            removeItem
         }}>
             {children}
         </cartContext.Provider>
     )
 }
-

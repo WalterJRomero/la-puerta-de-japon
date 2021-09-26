@@ -1,5 +1,6 @@
 import {Card, ButtonGroup, Button,Nav} from "react-bootstrap"
 import '../styles/item.css';
+import {Link} from "react-router-dom"
 
 function Item({item}) {
 
@@ -8,7 +9,7 @@ function Item({item}) {
     return (
         <>      
             <Card border="danger" className="m-5 shadow mb-5 card-item bg-white rounded" key={id} style={{width:'18rem'}}>
-                <Nav.Link href={`/item/${id}`}>
+                <Nav.Link as={Link} to={`/item/${id}`}>
                     <Card.Header className="fw-bold text-muted" >{title}</Card.Header>
                     <Card.Body>
                         <Card.Img variant="top" src={pictureUrl} className="img-detail "/>                  

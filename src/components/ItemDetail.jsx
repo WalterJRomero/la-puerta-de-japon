@@ -1,17 +1,13 @@
 import {Card,Container,Row} from "react-bootstrap"
 import ItemCount from "./ItemCount"
-import {useCartContext} from "../context/CartContext"
-import {useState,useContext} from "react"
-import {ContextApp} from "../App"
+import { useCartContext } from "../context/CartContext"
 
 function ItemDetail({item}) {
     
     const {addToCart} = useCartContext()
-    const {state} = useContext(ContextApp)
 
-    const onAdd =(cant)=>{
-        
-        addToCart({item:item,cantidad:cant})
+    const onAdd =(cant)=>{        
+        addToCart({cartItem:item,quantity:cant})
     }
     
 
