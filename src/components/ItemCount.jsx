@@ -6,37 +6,39 @@ import {Link} from "react-router-dom"
 
 function ItemCount({stock, initial, onAdd}) {
     
-    const [contador,setContador]= useState(initial)
+    const [count,setCount]= useState(initial)
     const [btnAdd,setBtnAdd] = useState(true)
+    const [stockItems,setStockItems] =useState(stock)
 
     function addCount() {
-        if (contador<stock){
-            setContador(contador+1)
+        if (count<stock){
+            setCount(count+1)
         }        
     }
     
     function remCount(){    
-        if (contador>1){
-            setContador(contador-1)
+        if (count>1){
+            setCount(count-1)
         } 
     }
 
-    const agregarCarrito=()=>{
-        onAdd(contador)
+    const addItem=()=>{
+        onAdd(count)
         setBtnAdd(false)
+        setStockItems(stockItems-count)
 
     }
 
     return (
         <>
             <Card.Body>                 
-                <Card.Text className="fw-bold">Cantidad:{contador}</Card.Text>
-                <Card.Text className="text-secondary">Unidades disponibles: {stock}</Card.Text>
+                <Card.Text className="fw-bold">Cantidad:{count}</Card.Text>
+                <Card.Text className="text-secondary">Unidades disponibles: {stockItems}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
                     {btnAdd?
                         <>
                             <Button variant="secondary" onClick={remCount}>-</Button>
-                            <Button variant="secondary" onClick={agregarCarrito}>Agregar al carrito</Button>
+                            <Button variant="secondary" onClick={addItem}>Agregar al carrito</Button>
                             <Button variant="secondary" onClick={addCount}>+</Button>                       
                         </>
                         :    

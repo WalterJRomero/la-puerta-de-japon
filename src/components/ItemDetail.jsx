@@ -4,10 +4,13 @@ import { useCartContext } from "../context/CartContext"
 
 function ItemDetail({item}) {
     
-    const {addToCart} = useCartContext()
+    const {addToCart,setItemsCart,isInCart} = useCartContext()
+    
 
     const onAdd =(cant)=>{        
         addToCart({cartItem:item,quantity:cant})
+        console.log(isInCart(item.id))
+        // setStock(stock)
     }
     
 

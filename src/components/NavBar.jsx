@@ -3,15 +3,19 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import CartWidget from './CartWidget'
 import {Link} from 'react-router-dom'
+import {useCartContext} from "../context/CartContext"
 
 function NavBar(){
-    
+
+    const {cartList}= useCartContext()
+    const cartLength = cartList.length    
+
     return (
         <>
             <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-end">
                 <Container>                    
                     <Nav.Link as={Link} to="/">
-                        <Navbar.Brand>La puerta de Japón</Navbar.Brand>                    
+                        <Navbar.Brand style={{fontSize:'1.5rem'}}>La puerta de Japón</Navbar.Brand>                    
                     </Nav.Link>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -24,9 +28,15 @@ function NavBar(){
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-                <Nav.Link as={Link} to= "/cart" >
-                    <CartWidget />                    
-                </Nav.Link>
+                {cartLength>0?
+                    <Nav.Link as={Link} to= "/cart" >
+                        <CartWidget />                    
+                    </Nav.Link>
+                    :
+                    <>                    
+                    </>
+                }
+
             </Navbar>
         </>
     )
