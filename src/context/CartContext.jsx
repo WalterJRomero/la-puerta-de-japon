@@ -9,7 +9,7 @@ export default function CartContextProvider({children}){
     const [cartList,setCartList] = useState([])    
     const [total,setTotal] = useState(0)
     const [quantity,setQuantity] = useState(0) 
-    const [stockItems, setStockItem] = useState([])  
+    // const [stockItems, setStockItem] = useState([])  
 
     function addToCart({cartItem,quantity}){     
        
@@ -68,21 +68,18 @@ export default function CartContextProvider({children}){
         let itemFindIndex = []        
         itemFindIndex = cartList.findIndex(itemToAdd=>id === itemToAdd.cartItem.id); 
         if (itemFindIndex === -1){
-            return false                       
+            return -1                       
         } else 
-            return true        
+            return itemFindIndex        
                
     }
 
+    //TENDRIA QUE GENERAR LA FUNCION PARA AUMENTAR O DISMINUIR LA CANTIDAD DE ITEMS DENTRO DEL CART
     function setItemsCart(){
-
-
     }
 
-    function setStock({item,stock}){
-        
-
-
+    // DEBERIA SETEAR LA CANTIDAD DE STOCK QUE TIENE UN ITEM
+    function setStock({item,stock}){    
     }
     
     return (

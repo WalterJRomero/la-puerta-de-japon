@@ -4,7 +4,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
 import {Link} from "react-router-dom"
 
-function ItemCount({stock, initial, onAdd}) {
+function ItemCount({stock,initial,onAdd}) {
     
     const [count,setCount]= useState(initial)
     const [btnAdd,setBtnAdd] = useState(true)
@@ -27,7 +27,7 @@ function ItemCount({stock, initial, onAdd}) {
         setBtnAdd(false)
         setStockItems(stockItems-count)
 
-    }
+    } 
 
     function stockItem(){
         if (stock>0){
@@ -42,7 +42,6 @@ function ItemCount({stock, initial, onAdd}) {
                 <Card.Text className="fw-bold">Cantidad:{count}</Card.Text>
                 <Card.Text className="text-secondary">Unidades disponibles: {stockItems}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
-
                 {stockItem()?
                     <>
                         {btnAdd?
@@ -63,12 +62,6 @@ function ItemCount({stock, initial, onAdd}) {
                        <Button variant="secondary" size="lg" disabled>Producto sin stock</Button>{' '}
                     </>
                 }
-
-                    
-
-
-
-
                 </ButtonGroup>
             </Card.Body>
         </>

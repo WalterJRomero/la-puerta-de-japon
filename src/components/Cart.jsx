@@ -3,52 +3,40 @@ import {useCartContext} from "../context/CartContext"
 import {Button, Card, Container,Nav} from "react-bootstrap"
 import {Link} from 'react-router-dom'
 import {cartEmptyImg} from '../utils/mock'
-import {useState} from 'react'
-
-
 
 function Cart() {
     
-    const {cartList,total,clearCart,removeItem,totalPrice,totalQ}= useCartContext()
-    
+    const {cartList,total,clearCart,removeItem,totalPrice,totalQ}= useCartContext()    
     const cartLength = cartList.length
 
     totalPrice();    
-    totalQ();
+    // totalQ();
 
-
+//-------- CODIGO DE PRUEBA PARA QUE NO DEJE INGRESAR DATOS SI UN ITEM SUPERA LA CANTIDAD QUE HAY EN STOCK, CODIGO A REVISAR-----------
+    let prueba=true
 
     function cartOk(){        
         let arrayCart=[]
         cartList.forEach(item=>{ 
             if(item.cartItem.stock>=item.quantity){
-
                 arrayCart.push(true)
                 console.log('hay stock')
-                console.log(arrayCart)            
-               
+                console.log(arrayCart)              
 
             }else {
                 arrayCart.push(false)
                 console.log('no hay stock') 
-                console.log(arrayCart)  
-                
+                console.log(arrayCart)                  
             }
         
-            if(arrayCart.includes(true)){
-                return true
-            } else return false
-
-
-        })}
-
-
-      
-        // console.log(arrayCart)
+            if(arrayCart.includes(false)){
+                 prueba=false
+            } else{ console.log('verdadero')}            
+            
+        })}      
     
-    
-    let prueba = cartOk();
-
+        cartOk()   
+//-------------------------------------------------------------------------------------------------------------------------------------
     return (
         <>   
             <h1 className="mt-3" >Tu carrito de compras</h1>     
@@ -65,9 +53,9 @@ function Cart() {
                             <Container key={item.cartItem.id} style={{ display:'flex' ,flexDirection:'row',  justifyContent:'space-between', alignItems:'center'}}>
                                 <Container style={{ display:'flex' ,flexDirection:'row',  justifyContent:'center', alignItems:'center'}}>
                                     <Card.Title className="m-1">Cantidad:</Card.Title>
-                                    <Button variant="secondary" onClick={()=>console.log('restaria')} className="m-1">-</Button>
+                                    {/* <Button variant="secondary" onClick={()=>console.log('restaria')} className="m-1">-</Button> */}
                                     <Card.Title className="m-1">{item.quantity}</Card.Title>
-                                    <Button variant="secondary" onClick={()=>console.log('sumaria')} className="m-1">+</Button>
+                                    {/* <Button variant="secondary" onClick={()=>console.log('sumaria')} className="m-1">+</Button> */}
                                 </Container>
                                 <Container style={{ display:'flex' ,flexDirection:'row',  justifyContent:'end', alignItems:'center'}}>
                                     <Card.Title style={{fontSize:'1.5rem'}}  className="m-1">u$s</Card.Title>
@@ -82,16 +70,13 @@ function Cart() {
                         </Container>                        
                     </Card>
                     <Card className='m-2 p-3' style={{ display:'flex' ,flexDirection:'row',justifyContent:'end'}}>                       
-                        <Button onClick={clearCart} className='btn-danger m-2'>Vacíar carrito</Button>
-
-                                {/* no anda */}
+                        <Button onClick={clearCart} className='btn-danger m-2'>Vacíar carrito</Button>       
 
                         {prueba?
-                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}} disabled>Terminar Compra</Button>
+                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}} >Terminar Compra</Button>
                             :
-                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}>Terminar Compra</Button>
+                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}disabled>Terminar Compra</Button>
                         }
-
 
                     </Card>
                 </Container>

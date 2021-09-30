@@ -2,16 +2,32 @@ import {Card,Container,Row} from "react-bootstrap"
 import ItemCount from "./ItemCount"
 import { useCartContext } from "../context/CartContext"
 
-function ItemDetail({item}) {
+function ItemDetail({item}){
     
-    const {addToCart,setItemsCart,isInCart} = useCartContext()
-    
-    
+    const {addToCart,isInCart,cartList} = useCartContext()
+        
+//--ACA VALIDARIA QUE LA CANTIDAD QUE QUIERE INGRESAR EL USUARIO NO SUPERE AL STOCK DISPONIBLE,
+// POR EJEMPLO SI STOCK ES 10 , QUE NO ME DEJE AGREGAR MAS DE 10, AHORA ESTA PASANDO QUE SI VUELVO A ENTRAR AL COMPONENTE ME DEJA AGREGAR OTROS 10 
+    let posicionId = isInCart(item.id)
+    let cantidadEncontrada  
+    if (posicionId ==-1){
+        console.log('no encontro el objeto')                    
+    }
+    else {
+        console.log(`esta es la cantidad encontrada`,cantidadEncontrada)        
+        cantidadEncontrada = cartList[posicionId].quantity
+    if  (item.stock>=cantidadEncontrada){
+       console.log('hay mucho stock del producto')       
+       console.log(`este es mi stock actualmente`,item.stock)    
+    } else {console.log('no hay stock')}
 
-    const onAdd =(cant)=>{        
-        addToCart({cartItem:item,quantity:cant})       
-    }   
-
+    }
+    
+//--------------------------------------------------------------------------------------------------------------------------------------------------
+    const onAdd =(cant)=>{            
+        addToCart({cartItem:item,quantity:cant})  
+    }
+        
     return (
         <>       
             <h1 className='text-danger m-3'>Conoce mas</h1> 
