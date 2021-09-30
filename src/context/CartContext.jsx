@@ -8,7 +8,8 @@ export default function CartContextProvider({children}){
 
     const [cartList,setCartList] = useState([])    
     const [total,setTotal] = useState(0)
-    const [quantity,setQuantity] = useState(0)    
+    const [quantity,setQuantity] = useState(0) 
+    const [stockItems, setStockItem] = useState([])  
 
     function addToCart({cartItem,quantity}){     
        
@@ -74,6 +75,12 @@ export default function CartContextProvider({children}){
     }
 
     function setItemsCart(){
+
+
+    }
+
+    function setStock({item,stock}){
+        
 
 
     }

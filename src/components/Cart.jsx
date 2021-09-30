@@ -10,10 +10,44 @@ import {useState} from 'react'
 function Cart() {
     
     const {cartList,total,clearCart,removeItem,totalPrice,totalQ}= useCartContext()
+    
     const cartLength = cartList.length
 
     totalPrice();    
     totalQ();
+
+
+
+    function cartOk(){        
+        let arrayCart=[]
+        cartList.forEach(item=>{ 
+            if(item.cartItem.stock>=item.quantity){
+
+                arrayCart.push(true)
+                console.log('hay stock')
+                console.log(arrayCart)            
+               
+
+            }else {
+                arrayCart.push(false)
+                console.log('no hay stock') 
+                console.log(arrayCart)  
+                
+            }
+        
+            if(arrayCart.includes(true)){
+                return true
+            } else return false
+
+
+        })}
+
+
+      
+        // console.log(arrayCart)
+    
+    
+    let prueba = cartOk();
 
     return (
         <>   
@@ -49,7 +83,16 @@ function Cart() {
                     </Card>
                     <Card className='m-2 p-3' style={{ display:'flex' ,flexDirection:'row',justifyContent:'end'}}>                       
                         <Button onClick={clearCart} className='btn-danger m-2'>Vacíar carrito</Button>
-                        <Button onClick={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}>Terminar Compra</Button>
+
+                                {/* no anda */}
+
+                        {prueba?
+                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}} disabled>Terminar Compra</Button>
+                            :
+                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}>Terminar Compra</Button>
+                        }
+
+
                     </Card>
                 </Container>
                 :        

@@ -29,24 +29,46 @@ function ItemCount({stock, initial, onAdd}) {
 
     }
 
+    function stockItem(){
+        if (stock>0){
+            return true
+        }else return false
+    }
+
+
     return (
         <>
             <Card.Body>                 
                 <Card.Text className="fw-bold">Cantidad:{count}</Card.Text>
                 <Card.Text className="text-secondary">Unidades disponibles: {stockItems}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
-                    {btnAdd?
-                        <>
-                            <Button variant="secondary" onClick={remCount}>-</Button>
-                            <Button variant="secondary" onClick={addItem}>Agregar al carrito</Button>
-                            <Button variant="secondary" onClick={addCount}>+</Button>                       
-                        </>
-                        :    
-                        <>
-                            <Button variant="primary" as={Link} to ={`/`}>Seguir comprando</Button>        
-                            <Button variant="success" as={Link} to ={`/cart`}>Terminar Compra</Button>
-                        </>                   
-                    }
+
+                {stockItem()?
+                    <>
+                        {btnAdd?
+                            <>
+                                <Button variant="secondary" onClick={remCount}>-</Button>
+                                <Button variant="secondary" onClick={addItem}>Agregar al carrito</Button>
+                                <Button variant="secondary" onClick={addCount}>+</Button>                       
+                            </>
+                            :    
+                            <>
+                                <Button variant="primary" as={Link} to ={`/`}>Seguir comprando</Button>        
+                                <Button variant="success" as={Link} to ={`/cart`}>Terminar Compra</Button>
+                            </>                   
+                        }
+                    </>
+                    :
+                    <>
+                       <Button variant="secondary" size="lg" disabled>Producto sin stock</Button>{' '}
+                    </>
+                }
+
+                    
+
+
+
+
                 </ButtonGroup>
             </Card.Body>
         </>
