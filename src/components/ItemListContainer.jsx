@@ -4,25 +4,35 @@ import {Spinner,Button} from "react-bootstrap"
 import ItemList from "./ItemList"
 import {getFetch} from "../utils/mock"
 import {useParams} from "react-router-dom"
+import { getFirestore } from "../services/getFirebase"
 
 function ItemListContainer({greeting}) {
         
-    const [productos,setProductos] =useState([])
+    const [products,setProducts] =useState([])
     const [loading,setLoading]=useState(true) 
     const {idCategoria}  = useParams()    
    
     useEffect(() => {    
-        getFetch
-        .then((respuesta) =>{  
 
-            if(idCategoria){
-                const categoriaFiltrada=respuesta.filter(prod=>prod.category.toLowerCase()===idCategoria)
-                setProductos(categoriaFiltrada)                
-            }
-            else {setProductos(respuesta)}
-        })
-        .catch((error)=>console.log(error))
-        .finally(()=>setLoading(false))
+        if(idCategoria){
+            const dbQuery = getFirestore()
+            dbQuery.collection('items').where('category','==',idCategoria).get()
+            .then(resp=>{
+                setProducts(resp.docs.map(products=>({id:products.id,...products.data()})))       
+            })
+            .catch(err=>console.log(err))
+            .finally(()=>setLoading(false))
+            
+        }else{
+            const dbQuery = getFirestore()
+            dbQuery.collection('items').get()
+            .then(resp=>{
+                setProducts(resp.docs.map(products=>({id:products.id,...products.data()})))       
+            })
+            .catch(err=>console.log(err))
+            .finally(()=>setLoading(false))
+        }      
+        
     },[idCategoria]) 
 
     return (
@@ -32,7 +42,7 @@ function ItemListContainer({greeting}) {
                     <Button variant="danger" disabled>
                         <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>Por favor espere...
                     </Button>:             
-                    <ItemList items={productos}/>           
+                    <ItemList items={products}/>           
             }     
         </>
     )

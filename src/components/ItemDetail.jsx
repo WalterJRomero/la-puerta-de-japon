@@ -8,20 +8,20 @@ function ItemDetail({item}){
         
 //--ACA VALIDARIA QUE LA CANTIDAD QUE QUIERE INGRESAR EL USUARIO NO SUPERE AL STOCK DISPONIBLE,
 // POR EJEMPLO SI STOCK ES 10 , QUE NO ME DEJE AGREGAR MAS DE 10, AHORA ESTA PASANDO QUE SI VUELVO A ENTRAR AL COMPONENTE ME DEJA AGREGAR OTROS 10 
-    let posicionId = isInCart(item.id)
-    let cantidadEncontrada  
-    if (posicionId ==-1){
-        console.log('no encontro el objeto')                    
-    }
-    else {
-        console.log(`esta es la cantidad encontrada`,cantidadEncontrada)        
-        cantidadEncontrada = cartList[posicionId].quantity
-    if  (item.stock>=cantidadEncontrada){
-       console.log('hay mucho stock del producto')       
-       console.log(`este es mi stock actualmente`,item.stock)    
-    } else {console.log('no hay stock')}
+    // let posicionId = isInCart(item.id)
+    // let cantidadEncontrada  
+    // if (posicionId ==-1){
+    //     console.log('no encontro el objeto')                    
+    // }
+    // else {
+    //     console.log(`esta es la cantidad encontrada`,cantidadEncontrada)        
+    //     cantidadEncontrada = cartList[posicionId].quantity
+    // if  (item.stock>=cantidadEncontrada){
+    //    console.log('hay mucho stock del producto')       
+    //    console.log(`este es mi stock actualmente`,item.stock)    
+    // } else {console.log('no hay stock')}// aca deberia deshabilitar el boton terminar compra, sumar etc.
 
-    }
+    // }
     
 //--------------------------------------------------------------------------------------------------------------------------------------------------
     const onAdd =(cant)=>{            

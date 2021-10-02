@@ -3,14 +3,72 @@ import {useCartContext} from "../context/CartContext"
 import {Button, Card, Container,Nav} from "react-bootstrap"
 import {Link} from 'react-router-dom'
 import {cartEmptyImg} from '../utils/mock'
+import {getFirestore} from '../services/getFirebase'
+import firebase from "firebase"
+import 'firebase/firestore'
+import {useState} from 'react'
 
 function Cart() {
     
     const {cartList,total,clearCart,removeItem,totalPrice,totalQ}= useCartContext()    
+    const [formData,setFormData]=useState({
+        name:'',
+        phone:'',
+        email:''
+
+    })
     const cartLength = cartList.length
 
     totalPrice();    
     // totalQ();
+    console.log(`aca tengo mi cartlis`,cartList)
+
+    const generateOrder=()=>{
+
+        const db = getFirestore()
+        const orderCol =db.collection('orders')
+
+        let order ={}
+        order.date =firebase.firestore.Timestamp.fromDate(new Date());
+
+        order.buyer =formData
+        order.total= totalPrice();
+        order.items =cartList.map(cartItem=>{
+            const id= cartItem.cartItem.title
+            const title=cartItem.cartItem.title
+            const price=cartItem.cartItem.price*cartItem.quantity
+
+            return {id,title,price}
+        })
+
+        console.log('se ejecuto')
+        console.log(order)
+    }
+
+    function handleOnChange(e){
+
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        })
+    }
+
+   function handleOnSubmit(e){
+
+    e.preventDefault()
+
+    let order={}
+    order.date=firebase.firestore.Timestamp.fromDate(new Date());
+    order.buyer=formData
+    order.total=totalPrice()
+    order.items=cartList.map(cartItem =>{
+        const id=cartItem.cartItem.id;
+        const title=cartItem.cartItem.title;
+        const price=cartItem.quantity*cartItem.cartItem.price
+        return {id,title,price}
+    })
+   }
+
 
 //-------- CODIGO DE PRUEBA PARA QUE NO DEJE INGRESAR DATOS SI UN ITEM SUPERA LA CANTIDAD QUE HAY EN STOCK, CODIGO A REVISAR-----------
     let prueba=true
@@ -20,13 +78,13 @@ function Cart() {
         cartList.forEach(item=>{ 
             if(item.cartItem.stock>=item.quantity){
                 arrayCart.push(true)
-                console.log('hay stock')
-                console.log(arrayCart)              
+                // console.log('hay stock')
+                // console.log(arrayCart)              
 
             }else {
                 arrayCart.push(false)
-                console.log('no hay stock') 
-                console.log(arrayCart)                  
+                // console.log('no hay stock') 
+                // console.log(arrayCart)                  
             }
         
             if(arrayCart.includes(false)){
@@ -36,6 +94,7 @@ function Cart() {
         })}      
     
         cartOk()   
+        // console.log('paso por aca')
 //-------------------------------------------------------------------------------------------------------------------------------------
     return (
         <>   
@@ -73,9 +132,59 @@ function Cart() {
                         <Button onClick={clearCart} className='btn-danger m-2'>Vacíar carrito</Button>       
 
                         {prueba?
-                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}} >Terminar Compra</Button>
+                             <>
+
+
+
+
+
+
+
+
+
+
+                                <form  
+                                    onSubmit={handleOnSubmit}
+                                    onChange={handleOnChange}  >
+                                    <input
+                                        type='text'
+                                        placeholder='ingrese nombre'
+                                        name='name'
+                                        value={formData.name}
+                                    />
+                                     <input
+                                        type='text'
+                                        placeholder='ingrese tel'
+                                        name='phone'   
+                                        value={formData.phone}                                     
+                                    />
+
+                                     <input
+                                        type='text'
+                                        placeholder='ingrese EMAIL'
+                                        name='email'
+                                        value={formData.email}   
+                                    />
+                                    {/* <input
+                                        type='text'
+                                        placeholder='confirme EMAIL'
+                                        name='email2'
+                                    /> */}
+                                
+                                    <Button onClick={generateOrder} className='m-2' variant="success" style={{fontSize:'1.5rem'}} >Terminar Compra</Button>
+                                </form>
+                             
+                             
+                             
+                             </>       
+
+
+
                             :
-                            <Button onChange={()=>console.log('compra realizada')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}disabled>Terminar Compra</Button>
+                            <>
+                                <Container>Parece que hay un item que supera la cantidad que tenemos disponible</Container>
+                                <Button onChange={()=>console.log('deshabilitado')} className='m-2' variant="success" style={{fontSize:'1.5rem'}}disabled>Terminar Compra</Button>
+                            </>
                         }
 
                     </Card>

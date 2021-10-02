@@ -3,27 +3,25 @@ import {useEffect, useState} from 'react'
 import ItemDetail from "./ItemDetail";
 import {Spinner,Button} from "react-bootstrap"
 import { useParams } from "react-router";
+import { getFirestore } from "../services/getFirebase";
 
 function ItemDetailContainer() {
     
     const [unItem, setUnItem] = useState();     
     const {idItem} = useParams(); 
-    const [loading,setLoading]=useState(true) 
-    
+    const [loading,setLoading]=useState(true)         
+        
     useEffect(() => {           
-        getFetch        
-        .then((respuesta) =>{            
-           
-            if(idItem === undefined){         
-                setUnItem(respuesta)
-                
-            }else{           
-            const idFiltrado=respuesta.find(item=>item.id===parseInt(idItem))              
-            setUnItem(idFiltrado)}
-        })
-        .catch((error)=>console.log(error))
-        .finally(()=>setLoading(false))
-    },[idItem])     
+
+        const dbQuery = getFirestore()        
+        dbQuery.collection('items').doc(idItem).get()
+        .then(resp=>setUnItem({id:resp.id,...resp.data()}))
+        .catch(err=>console.log(err))
+        .finally(()=>setLoading(false))  
+        
+    },[idItem])
+
+   
 
     return (
         <>

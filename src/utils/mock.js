@@ -1,4 +1,4 @@
-const datos = [
+const items = [
     {   id:1,
         category:'paquetes',
         title:'Tokyo 10 días',
@@ -136,10 +136,10 @@ const datos = [
     ];
 
     export const getFetch = new Promise((resolve,reject) =>{
-        setTimeout(()=>resolve(datos),2000)        
+        setTimeout(()=>resolve(items),2000)        
     })   
 
-const unoSolo = datos.filter((producto)=>producto.id===1);
+const unoSolo = items.filter((producto)=>producto.id===1);
     
     export const getUnoFetch = new Promise((resolve,reject) =>{
             setTimeout(()=>resolve(unoSolo),2000)        
