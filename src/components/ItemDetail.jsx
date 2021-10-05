@@ -6,7 +6,6 @@ function ItemDetail({item}){
     
     const {addToCart} = useCartContext()
 
-
     //codigo de prueba
 // const{addToCart,isInCart,cartList,totalQ} = useCartContext()    
 //--ACA VALIDARIA QUE LA CANTIDAD QUE QUIERE INGRESAR EL USUARIO NO SUPERE AL STOCK DISPONIBLE,

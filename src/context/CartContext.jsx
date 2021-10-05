@@ -26,6 +26,17 @@ export default function CartContextProvider({children}){
         }        
     }
 
+    function substractToCart({cartItem,quantity}){ 
+        let itemFindIndex = []        
+        itemFindIndex = cartList.findIndex(itemToAdd=>cartItem.id === itemToAdd.cartItem.id); 
+        if (itemFindIndex === -1){
+            setCartList(cartList=>[...cartList,{cartItem,quantity}])            
+        } else {
+            let newCart=[...cartList];          
+            newCart[itemFindIndex].quantity -= quantity;
+            setCartList(newCart)           
+        }        
+    }
     //funcion para borrar todos los items de mi carrito, se utiliza cuando el usuario quiere vaciar el carrito por eleccion, y cuando se completa una orden satisfactoriamente
     function clearCart(){  
         setCartList([])              
@@ -57,15 +68,12 @@ export default function CartContextProvider({children}){
         } else 
             return itemFindIndex              
     }
-
-    //TENDRIA QUE GENERAR LA FUNCION PARA AUMENTAR O DISMINUIR LA CANTIDAD DE ITEMS DENTRO DEL CART
-    // function setItemsCart(){
-    // }
-
+    
     // DEBERIA SETEAR LA CANTIDAD DE STOCK QUE TIENE UN ITEM
     // function setStock({item,stock}){    
     // }
 
+    //guardo el numero de orden generado correctamente, se utiliza en EndWindows, si mi numero de id no cambió, significa que el usuario no generó una orden correctamente, porque no completo los datos.
     function setId(id){
         setIdOrder(id)
     }
@@ -80,8 +88,9 @@ export default function CartContextProvider({children}){
             totalPrice,
             totalQ,
             isInCart,
-            setId
-            // setItemsCart
+            setId,
+            substractToCart
+            
         }}>
             {children}
         </cartContext.Provider>

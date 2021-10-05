@@ -8,19 +8,19 @@ import 'firebase/firestore'
 import {useState} from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import EndWindow from './EndWindow.jsx'
+import { IoCodeWorkingOutline } from "react-icons/io5"
 
 function Cart() {
     
-    const {cartList,clearCart,removeItem,totalPrice,setId}= useCartContext()     
+    const {cartList,clearCart,removeItem,totalPrice,setId,addToCart,substractToCart}= useCartContext()     
+     
     const [formData,setFormData]=useState({
         name:'',
         surname:'',
         phone:'',
         email:'',
         email2:'',
-    })
-    
-    const cartLength = cartList.length  
+    })   
 
     const generateOrder=()=>{
 
@@ -65,13 +65,11 @@ function Cart() {
         .then(resp=>{
             setId(resp.id)                      
         })
-
         .catch(err=>console.log(err))
         .finally(()=>{
             setFormData({});          
         })
         
-
         //con un id especifico
         //db.collection('orders').doc(id).set(order)
 
@@ -93,7 +91,6 @@ function Cart() {
                     stock:docSnapchot.data().stock - cartList.find(item=> item.cartItem.id === docSnapchot.id).quantity
                 })
             })
-
             batch.commit().then(res =>{
                 console.log('resultado batch',res)
             })
@@ -101,42 +98,42 @@ function Cart() {
             
         })
     }
-
 //-------- CODIGO DE PRUEBA PARA QUE NO DEJE INGRESAR DATOS SI UN ITEM SUPERA LA CANTIDAD QUE HAY EN STOCK, CODIGO A REVISAR-----------
-    let prueba=true
-
+    let itemsCartOk = true    
     function cartOk(){        
         let arrayCart=[]
         cartList.forEach(item=>{ 
+            // pregunta por cada item si el stock es suficiente para cubrir la cantidad elegida por el usuario
             if(item.cartItem.stock>=item.quantity){
-                arrayCart.push(true)
-                // console.log('hay stock')
-                // console.log(arrayCart)              
-
+                //si hay stock agrega un true al array de comprobaciones
+                arrayCart.push(true)                
             }else {
-                arrayCart.push(false)
-                // console.log('no hay stock') 
-                // console.log(arrayCart)                  
+                //si NO hay stock agrega un falso al array
+                arrayCart.push(false)                                
             }
-        
             if(arrayCart.includes(false)){
-                 prueba=false
-            } else{ console.log('verdadero')}            
-            
-        })}      
+                itemsCartOk=false                
+                console.log(itemsCartOk)
+                console.log('No hay stock de algun articulo del carrito')
+                
+            } else {           
+                itemsCartOk=true   
+                console.log('Hay stock suficiente de los articulos del carrito')}
+        })}    
+    cartOk()    
     
-        cartOk()      
+    function changeQuantity(item,cant) {      
+        addToCart({cartItem:item,quantity:cant})
+    }
+
 //-------------------------------------------------------------------------------------------------------------------------------------
-
-
-
     return (
         <>   
             <h1 className="mt-3" >Tu carrito de compras</h1>     
-            {cartLength>0?               
+            {cartList.length>0?               
                 <Container fluid>
                     <Row>                                          
-                    <Col xs={12} md={8}>                        
+                        <Col xs={12} md={8}>                        
                             <Container fluid className='m-1 p-1'>
                                 {cartList.map(item=>
                                     <Card className='m-2 p-1'key={item.cartItem.id} style={{ display:'flex' ,flexDirection:'row', alignItems:'center'}}>
@@ -146,14 +143,17 @@ function Cart() {
                                             <Button onClick={()=>removeItem(item.cartItem.id)} variant="danger">
                                                 <RiDeleteBin6Line className='h4' style={{justifyContent:"center"}}/>
                                             </Button>                                
-                                        </Container>
-                                        
+                                        </Container>                                        
                                         <Container key={item.cartItem.id} style={{ display:'flex' ,flexDirection:'row',  justifyContent:'space-between', alignItems:'center'}}>
                                             <Container style={{ display:'flex' ,flexDirection:'row',  justifyContent:'center', alignItems:'center'}}>
-                                                <Card.Title className="m-1">Cantidad:</Card.Title>
-                                                <Button variant="secondary" onClick={()=>console.log('restaria')} className="m-1 h6">-</Button>
-                                                <Card.Title className="m-1">{item.quantity}</Card.Title>
-                                                <Button variant="secondary" onClick={()=>console.log('sumaria')} className="m-1 h6">+</Button>
+                                                <Card.Title className="m-1">Cantidad:</Card.Title>                                              
+                                                {item.quantity>1?
+                                                    <Button variant="secondary" onClick={()=>changeQuantity(item.cartItem,-1)} className="m-1 h6">-</Button>                                           
+                                                :
+                                                    <Button variant="secondary" onClick={()=>changeQuantity(item.cartItem,-1)} className="m-1 h6" disabled>-</Button>
+                                                }                                                
+                                                <Card.Title className="m-1">{item.quantity}</Card.Title>                                                
+                                                <Button variant="secondary" onClick={()=>changeQuantity(item.cartItem,1)} className="m-1 h6">+</Button>
                                             </Container>
                                             <Container style={{ display:'flex' ,flexDirection:'row',  justifyContent:'end', alignItems:'center'}}>
                                                 <Card.Title style={{fontSize:'1.5rem'}}  className="m-1">u$s</Card.Title>
@@ -162,11 +162,11 @@ function Cart() {
                                         </Container> 
                                     </Card>                    
                                 )} 
-                            </Container>                                                                     
+                             </Container>                                                                     
                         </Col>
                         <Col xs={6} md={4}>                   
                             <Card className='m-3 p-2' style={{ display:'flex' ,flexDirection:'row',justifyContent:'end'}}>                       
-                                {prueba?
+                                {itemsCartOk?                               
                                     <>
                                         <Container>
                                             <h5>Por favor completa tus datos para continuar la compra</h5>
@@ -228,26 +228,8 @@ function Cart() {
                                                         <input type="radio" name="movimiento" value="Traspaso" defaultChecked/>Efectivo 
                                                     </label>   
                                                 </div>
-                                                <Button onClick={clearCart} className='btn-danger mt-3' style={{width:"90%"}}>Vacíar carrito</Button>                                                      
-                                               
-                                                <EndWindow generateOrder={generateOrder} type="submit"/>                                           
-                                                                                                   
-                                                       {/* <EndWindow name={formData.name} id={idOrder} generateOrder={generateOrder}/>*/}
-                                               
-                                                {/* {buttonFinish?
-                                                    <Button onClick={generateOrder} className='m-2' variant="success" type="submit" style={{width:"90%",height:'5vh'}}>                                                        
-                                                       Continuar Compra
-                                                    </Button>
-                                                :
-                                                <>
-                                                    {idOrder?
-                                                        <EndWindow name={formData.name} id={idOrder}/>                                                :
-                                                        <>
-                                                        </>
-                                                    }                                                  
-                                                </>
-                                                } */}
-                                                
+                                                <Button onClick={clearCart} className='btn-danger mt-3' style={{width:"90%"}}>Vacíar carrito</Button>                                      
+                                                <EndWindow generateOrder={generateOrder} type="submit"/>                                                                            
                                             </form>                             
                                         </Container>                             
                                     </> 

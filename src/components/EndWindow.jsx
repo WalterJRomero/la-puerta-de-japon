@@ -7,7 +7,7 @@ import {Link} from "react-router-dom"
 
 function EndWindow({generateOrder}) {
     const [show, setShow] = useState(false);
-    const {clearCart,idOrder,setId}= useCartContext() 
+    const {clearCart,idOrder}= useCartContext() 
     const [idOld,setIdOld]=useState(idOrder)
     const [loading,setLoading]  = useState(false)
 
@@ -25,8 +25,7 @@ function EndWindow({generateOrder}) {
   
     const closeBuy=() =>{
         handleClose()
-        clearCart()
-        // setId('')
+        clearCart()        
     }
 
     return (
@@ -36,42 +35,36 @@ function EndWindow({generateOrder}) {
             </Button>
             {loading? 
                 <>                          
-                {(idOld!==idOrder)?
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Gracias por tu Compra!</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Este es tu numero de orden ID: {idOrder}, te lo enviaremos al email registrado anteriormente.</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={closeBuy} as={Link} to ={`/`}>
-                                Cerrar
-                            </Button>          
-                        </Modal.Footer>
-                    </Modal>
-                    :
-                    <>
-                    <Modal show={show} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Ups!</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>Parece que te olvidaste completar algunos datos, por favor completalos para finalizar la compra</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Cerrar
-                            </Button>          
-                        </Modal.Footer>
-                    </Modal>
-
-                    </> 
-                }
+                    {(idOld!==idOrder)?
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Gracias por tu Compra!</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Este es tu numero de orden {idOrder}, te lo enviaremos al email registrado anteriormente.</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={closeBuy} as={Link} to ={`/`}>
+                                    Cerrar
+                                </Button>          
+                            </Modal.Footer>
+                        </Modal>
+                        :                        
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Ups!</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Parece que te olvidaste completar algunos datos, por favor completalos para finalizar la compra</Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleClose}>
+                                    Cerrar
+                                </Button>          
+                            </Modal.Footer>
+                        </Modal>                        
+                    }
                 </>
-            :
-            <>
-            </>      
-        
-        
-        
-        }
+                :
+                <>
+                </>        
+            }
         </>
     )
 }
