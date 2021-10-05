@@ -26,7 +26,6 @@ function ItemCount({stock,initial,onAdd}) {
         onAdd(count)
         setBtnAdd(false)
         setStockItems(stockItems-count)
-
     } 
 
     function stockItem(){
@@ -35,11 +34,10 @@ function ItemCount({stock,initial,onAdd}) {
         }else return false
     }
 
-
     return (
         <>
             <Card.Body>                 
-                <Card.Text className="fw-bold">Cantidad:{count}</Card.Text>
+                <Card.Text className="fw-bold">Cantidad: {count}</Card.Text>
                 <Card.Text className="text-secondary">Unidades disponibles: {stockItems}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
                 {stockItem()?

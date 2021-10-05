@@ -5,16 +5,14 @@ import {useCartContext} from "../context/CartContext"
 
 function CartWidget() {
 
-    const {quantity,totalQ}= useCartContext()
-    
-    totalQ();
-    
+    const {totalQ}= useCartContext()
+
     return (
         <>  
             <Button variant="secondary">
                     <IoCartOutline className='h4'/>
-                <Badge bg="primary">
-                    {quantity}
+                <Badge bg="light" style={{border:"black solid 1px", color:"black"}}>                   
+                    {totalQ()}
                 </Badge>
                 <span className="visually-hidden"></span>
             </Button>                         

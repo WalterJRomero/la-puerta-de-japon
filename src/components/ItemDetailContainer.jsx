@@ -1,4 +1,3 @@
-import {getFetch} from "../utils/mock";
 import {useEffect, useState} from 'react'
 import ItemDetail from "./ItemDetail";
 import {Spinner,Button} from "react-bootstrap"
@@ -7,7 +6,7 @@ import { getFirestore } from "../services/getFirebase";
 
 function ItemDetailContainer() {
     
-    const [unItem, setUnItem] = useState();     
+    const [item, setItem] = useState();     
     const {idItem} = useParams(); 
     const [loading,setLoading]=useState(true)         
         
@@ -15,12 +14,11 @@ function ItemDetailContainer() {
 
         const dbQuery = getFirestore()        
         dbQuery.collection('items').doc(idItem).get()
-        .then(resp=>setUnItem({id:resp.id,...resp.data()}))
+        .then(resp=>setItem({id:resp.id,...resp.data()}))
         .catch(err=>console.log(err))
         .finally(()=>setLoading(false))  
-        
-    },[idItem])
 
+    },[idItem])
    
 
     return (
@@ -29,7 +27,7 @@ function ItemDetailContainer() {
                     <Button variant="primary" disabled className="m-2 p-2">
                         <Spinner as="span" animation="grow" size="sm" role="status" aria-hidden="true"/>Cargando detalles
                     </Button>: 
-                    unItem && <ItemDetail key={unItem.id} item={unItem}/>                 
+                    item && <ItemDetail key={item.id} item={item}/>                 
             }           
         </>
     )

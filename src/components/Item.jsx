@@ -13,7 +13,7 @@ function Item({item}) {
                     <Card.Header className="fw-bold text-muted" >{title}</Card.Header>
                     <Card.Body>
                         <Card.Img variant="top" src={pictureUrl} className="img-detail "/>                  
-                        <Card.Text className='p-2 m-1 fw-bold h5'>u$s:{price}</Card.Text>                 
+                        <Card.Text className='p-2 m-1 fw-bold h5'>u$s: {price}</Card.Text>                 
                         <Card.Title className="m-1 p-1 lead text-muted">{shortDescription}</Card.Title>
                         <ButtonGroup aria-label="Basic example">
                                 <Button variant="secondary" >Detalles</Button>                        

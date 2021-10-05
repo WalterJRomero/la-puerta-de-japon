@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav'
 import CartWidget from './CartWidget'
 import {Link} from 'react-router-dom'
 import {useCartContext} from "../context/CartContext"
+import '../styles/NavBar.css'
 
 function NavBar(){
 
@@ -12,7 +13,7 @@ function NavBar(){
 
     return (
         <>
-            <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-end">
+            <Navbar bg="dark" variant="dark" expand="lg" className="d-flex justify-content-end brand-logo" sticky="top">
                 <Container>                    
                     <Nav.Link as={Link} to="/">
                         <Navbar.Brand style={{fontSize:'1.5rem'}}>La puerta de Japón</Navbar.Brand>                    
@@ -36,7 +37,6 @@ function NavBar(){
                     <>                    
                     </>
                 }
-
             </Navbar>
         </>
     )
