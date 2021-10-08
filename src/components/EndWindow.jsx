@@ -6,17 +6,17 @@ import {Link} from "react-router-dom"
 
 
 function EndWindow({generateOrder}) {
-    const [show, setShow] = useState(false);
     const {clearCart,idOrder}= useCartContext() 
-    const [idOld,setIdOld]=useState(idOrder)
+    const [show, setShow] = useState(false);
+    const [idOld,setIdOld]=useState('')
     const [loading,setLoading]  = useState(false)
-
+    
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
 
     const finishBuy=()=>{  
-        
+        setIdOld(idOrder)
         if (idOld!==idOrder && idOrder.lenght>0)
         generateOrder()
         setTimeout(()=>handleShow(),2000)  
