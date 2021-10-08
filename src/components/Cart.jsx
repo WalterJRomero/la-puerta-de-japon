@@ -12,7 +12,7 @@ import { IoCodeWorkingOutline } from "react-icons/io5"
 
 function Cart() {
     
-    const {cartList,clearCart,removeItem,totalPrice,setId,addToCart,substractToCart}= useCartContext()     
+    const {cartList,clearCart,removeItem,totalPrice,setId,addToCart}= useCartContext()     
      
     const [formData,setFormData]=useState({
         name:'',
@@ -113,12 +113,12 @@ function Cart() {
             }
             if(arrayCart.includes(false)){
                 itemsCartOk=false                
-                console.log(itemsCartOk)
-                console.log('No hay stock de algun articulo del carrito')
+              //No hay stock de algun articulo del carrito
                 
             } else {           
                 itemsCartOk=true   
-                console.log('Hay stock suficiente de los articulos del carrito')}
+                //Hay stock suficiente de los articulos del carrito
+            }
         })}    
     cartOk()    
     

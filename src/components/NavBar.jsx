@@ -8,8 +8,7 @@ import '../styles/NavBar.css'
 
 function NavBar(){
 
-    const {cartList}= useCartContext()
-    const cartLength = cartList.length    
+    const {cartList}= useCartContext()    
 
     return (
         <>
@@ -29,7 +28,7 @@ function NavBar(){
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
-                {cartLength>0?
+                {cartList.length>0?
                     <Nav.Link as={Link} to= "/cart" >
                         <CartWidget />                    
                     </Nav.Link>

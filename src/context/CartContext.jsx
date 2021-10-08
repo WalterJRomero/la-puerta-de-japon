@@ -8,9 +8,7 @@ export default function CartContextProvider({children}){
 
     const [cartList,setCartList] = useState([])    
     const [idOrder,setIdOrder] =useState('')
-    // const [stockItems, setStockItem] = useState([])  
-    
-    
+          
     //pasan como un objeto mi item elegido y su cantidad, luego se busca la posicion dentro del array cartList(que guarda todos mis items) donde se encuentra, si no es encontrado
     //por medio del spread operator se añade el item y su cantidad a mi cartList de items guardados. En caso de encontrarse utilizo el index retornado para ir a la posicion especifica dentro del cartList
     //y sumar la cantidad a mi cantidad guardada. Esto evitar duplicar mismos items en diferentes posiciones dentro del carrito de compras.
@@ -22,18 +20,6 @@ export default function CartContextProvider({children}){
         } else {
             let newCart=[...cartList];          
             newCart[itemFindIndex].quantity += quantity;
-            setCartList(newCart)           
-        }        
-    }
-
-    function substractToCart({cartItem,quantity}){ 
-        let itemFindIndex = []        
-        itemFindIndex = cartList.findIndex(itemToAdd=>cartItem.id === itemToAdd.cartItem.id); 
-        if (itemFindIndex === -1){
-            setCartList(cartList=>[...cartList,{cartItem,quantity}])            
-        } else {
-            let newCart=[...cartList];          
-            newCart[itemFindIndex].quantity -= quantity;
             setCartList(newCart)           
         }        
     }
@@ -68,11 +54,7 @@ export default function CartContextProvider({children}){
         } else 
             return itemFindIndex              
     }
-    
-    // DEBERIA SETEAR LA CANTIDAD DE STOCK QUE TIENE UN ITEM
-    // function setStock({item,stock}){    
-    // }
-
+        
     //guardo el numero de orden generado correctamente, se utiliza en EndWindows, si mi numero de id no cambió, significa que el usuario no generó una orden correctamente, porque no completo los datos.
     function setId(id){
         setIdOrder(id)
@@ -88,9 +70,7 @@ export default function CartContextProvider({children}){
             totalPrice,
             totalQ,
             isInCart,
-            setId,
-            substractToCart
-            
+            setId            
         }}>
             {children}
         </cartContext.Provider>
