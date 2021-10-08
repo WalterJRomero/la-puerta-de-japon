@@ -8,7 +8,6 @@ import 'firebase/firestore'
 import {useState} from 'react'
 import { RiDeleteBin6Line } from "react-icons/ri";
 import EndWindow from './EndWindow.jsx'
-import { IoCodeWorkingOutline } from "react-icons/io5"
 
 function Cart() {
     

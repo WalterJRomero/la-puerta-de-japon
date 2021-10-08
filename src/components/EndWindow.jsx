@@ -13,7 +13,7 @@ function EndWindow({generateOrder}) {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    
 
     const finishBuy=()=>{  
         
