@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useParams} from "react-router";
+import {Link} from 'react-router-dom'
+import Nav from 'react-bootstrap/Nav'
 import {getFirestore} from "../../services/getFirebase";
 import Spinner from "react-bootstrap/Spinner"
 import Button from "react-bootstrap/Button"
@@ -36,6 +38,9 @@ function ItemDetailContainer() {
                         <>
                             <h1 className='text-danger'>Producto no encontrado</h1>
                             <h2 className='text-danger'>Por favor volvé a elegir un producto de nuestro catalogo</h2>
+                            <Nav.Link as={Link} to="/" style={{fontSize:'1.5rem'}}>
+                                Volvé al sitio pulsando aquí                    
+                            </Nav.Link>
                         </>
                     }  
                 </>                    
