@@ -1,5 +1,5 @@
 import { useParams} from "react-router";
-import '../styles/CategoriesTitle.css'
+import '../styles/style.css'
 
 function CategoriesTitle(){
 
@@ -24,6 +24,3 @@ function CategoriesTitle(){
     )
 }
 export default CategoriesTitle
-
-
-

@@ -36,25 +36,15 @@ export default function CartContextProvider({children}){
     }
     
     //esta funcion tambien podria hacer con un for each, para que recorra el array y quantity y price se sumen al acum 
-    function totalPrice(){
+    function totalPrice(){//precio total de mi carrito
         return cartList.reduce((acum,valor)=>(acum+(valor.quantity*valor.cartItem.price)),0)
     }
 
     //tambien con un foreach se podria hacer un acumulador para sumar las cantidades de todo el cartList, que es el que guarda mis items del carrito
-    function totalQ(){
+    function totalQ(){//cantidad de items de mi carrito
         return cartList.reduce((acum,valor)=>acum+valor.quantity,0)
     }
-
-    //funcion para saber si un item esta dentro de mi carrito, si se encuentra devuelve en que posicion se encontró. Sino devuelve -1, no se encontró
-    function isInCart(id){
-        let itemFindIndex = []        
-        itemFindIndex = cartList.findIndex(itemToAdd=>id === itemToAdd.cartItem.id); 
-        if (itemFindIndex === -1){
-            return -1                       
-        } else 
-            return itemFindIndex              
-    }
-        
+          
     //guardo el numero de orden generado correctamente, se utiliza en EndWindows, si mi numero de id no cambió, significa que el usuario no generó una orden correctamente, porque no completo los datos.
     function setId(id){
         setIdOrder(id)
@@ -69,8 +59,7 @@ export default function CartContextProvider({children}){
             removeItem,
             totalPrice,
             totalQ,
-            isInCart,
-            setId            
+            setId                    
         }}>
             {children}
         </cartContext.Provider>

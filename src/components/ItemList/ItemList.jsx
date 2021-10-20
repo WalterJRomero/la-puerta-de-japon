@@ -1,6 +1,8 @@
+import Row from "react-bootstrap/Row"
+import Container from "react-bootstrap/Container"
 import Item from "./Item"
-import {Container,Row} from "react-bootstrap"
 
+//componente que recibe por prop un array de items, estos items luego se visualizan uno por uno a través del componente ITEM.
 function ItemList({items}) {
     
     return (

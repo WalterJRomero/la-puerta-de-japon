@@ -1,9 +1,10 @@
 import { useState } from "react"
+import {Link} from "react-router-dom"
 import Card from 'react-bootstrap/Card'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import Button from 'react-bootstrap/Button'
-import {Link} from "react-router-dom"
 
+//componente encargado de realizar la logica de sumar o restar en cantidad requerida de items deseados, si no hay stock de un producto el boton de sumar o restar esta deshabilitado.
 function ItemCount({stock,initial,onAdd}) {
     
     const [count,setCount]= useState(initial)
@@ -27,20 +28,14 @@ function ItemCount({stock,initial,onAdd}) {
         setBtnAdd(false)
         setStockItems(stockItems-count)
     } 
-
-    function stockItem(){
-        if (stock>0){
-            return true
-        }else return false
-    }
-
+       
     return (
         <>
             <Card.Body>                 
                 <Card.Text className="fw-bold">Cantidad: {count}</Card.Text>
                 <Card.Text className="text-secondary">Unidades disponibles: {stockItems}</Card.Text>
                 <ButtonGroup aria-label="Basic example">
-                {stockItem()?
+                {stock>0?//comprobacion del stock, en caso de no haber directamente el boton se deshabilita
                     <>
                         {btnAdd?
                             <>

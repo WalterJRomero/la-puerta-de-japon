@@ -1,10 +1,10 @@
-import React from 'react'
-import {Modal,Button} from 'react-bootstrap'
 import {useState} from 'react'
-import { useCartContext } from "../context/CartContext"
 import {Link} from "react-router-dom"
+import {useCartContext} from "../../context/CartContext"
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
-
+// este componente recibe por prop todos los datos del cliente y los items que esta comprando, valida que se haya ingresado un numero de orden correcto. Luego muestra por modal el numero de orden de compra
 function EndWindow({generateOrder}) {
     const {clearCart,idOrder}= useCartContext() 
     const [show, setShow] = useState(false);
@@ -14,13 +14,13 @@ function EndWindow({generateOrder}) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     
-
+//se comprueba que, si se esta intentando finalizar la compra con los datos aportados, pero no hubo orden emitida, significa que anteriormente no se hizo correctamente. Por ende debe completar los datos
+//si el registro fue satisfactorio, el numero de orden existe y es distinto a la orden por default(vacia). En ese momento se genera la orden nueva y se muestra por pantalla.
     const finishBuy=()=>{  
-        setIdOld(idOrder)
-        if (idOld!==idOrder && idOrder.lenght>0)
-        generateOrder()
+        setIdOld(idOrder)        
+        generateOrder()        
         setTimeout(()=>handleShow(),2000)  
-        setLoading(true)
+        setLoading(true)           
     }
   
     const closeBuy=() =>{
@@ -35,7 +35,7 @@ function EndWindow({generateOrder}) {
             </Button>
             {loading? 
                 <>                          
-                    {(idOld!==idOrder)?
+                    {(idOld!==idOrder)?//si el numero de orden cambio, significa que se registraron datos correctamente. muestra el numero y el boton cerrar.
                         <Modal show={show} onHide={handleClose}>
                             <Modal.Header closeButton>
                                 <Modal.Title>Gracias por tu Compra!</Modal.Title>

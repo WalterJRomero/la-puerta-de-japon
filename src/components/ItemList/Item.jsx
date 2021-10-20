@@ -1,14 +1,18 @@
-import {Card, ButtonGroup, Button,Nav} from "react-bootstrap"
-import '../styles/item.css';
+import Card from "react-bootstrap/Card"
+import ButtonGroup from 'react-bootstrap/ButtonGroup'
+import Button from 'react-bootstrap/Button'
+import Nav from 'react-bootstrap/Nav'
 import {Link} from "react-router-dom"
+import '../../styles/style.css';
 
+//Componente encargado de mostrar un breve detalle del producto
 function Item({item}) {
 
     const {id,title,shortDescription,price,pictureUrl} = item  
     
     return (
         <>      
-            <Card border="danger" className="m-5 shadow mb-5 card-item bg-white rounded" key={id} style={{width:'18rem'}}>
+            <Card border="danger" className="m-5 shadow mb-5 card-item bg-white rounded" key={id} style={{maxWidth:'17rem'}}>
                 <Nav.Link as={Link} to={`/item/${id}`}>
                     <Card.Header className="fw-bold text-muted" >{title}</Card.Header>
                     <Card.Body>
@@ -16,7 +20,7 @@ function Item({item}) {
                         <Card.Text className='p-2 m-1 fw-bold h5'>u$s: {price}</Card.Text>                 
                         <Card.Title className="m-1 p-1 lead text-muted">{shortDescription}</Card.Title>
                         <ButtonGroup aria-label="Basic example">
-                                <Button variant="secondary" >Detalles</Button>                        
+                            <Button variant="secondary" >Detalles</Button>                        
                         </ButtonGroup>                       
                     </Card.Body>
                 </Nav.Link>

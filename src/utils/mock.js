@@ -146,3 +146,5 @@ const unoSolo = items.filter((producto)=>producto.id===1);
         })  
 
 export const cartEmptyImg = 'https://i.postimg.cc/G2hshRLx/carrito-Vacio.png'
+
+export const officeImg = 'https://risupress.com/wp-content/uploads/2020/10/Japanese-Office-Family.jpg'

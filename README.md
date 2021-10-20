@@ -1,40 +1,64 @@
--Proyecto Ecommerce, Coderhouse Camada 16935
+# La puerta de Japón
+### _Proyecto Ecommerce, Coderhouse Camada 16935_
 
--Alumno: Walter Romero
+[![N|Solid][CoderHouse]](https://www.coderhouse.com/)
+### Descripción
+Esta página se diseñó con la temática de venta de servicios y productos sobre Japón. Se continuó el tema elegido en los cursos anteriores de [Desarrollo Web y Javascript]( https://walterjromero.github.io/La_puerta_de_Japon/ )
 
--Descripción: Esta pagína se diseño con la tematíca de venta de servicios y productos sobre Japón. Se continuó el tema elegido en los cursos anteriores de Desarrollo Web y Javascript ( https://walterjromero.github.io/La_puerta_de_Japon/ ). 
+### Instalación
+- Instalar Git y NodeJS por `npm` (*Versiones instaladas Git v2.31.1 y Node.js v15.14.0*)
+- Clonar repositorio con `git clone https://github.com/WalterJRomero/la-puerta-de-japon`
+- Iniciar proyecto con `npm start`
 
--Utils/mock: se generó una pequeña base de datos para poder utilizarla en las diferentes categorías. Se añade una descripción corta para que sea previsualizada en el itemlistcontainer, luego se añadirá una descripción mas extensa para poder mostrarla en "detalle". Se crea la función getFetch para generar la promesa y poder devolver los valores del array, con setTimeOut se retrasa 2 segundos la carga. Se cargo la imagen de un carrito de compras, se utiliza en el componente Cart cuando el usuario aún no tiene productos guardados.
+### Características
+- Se puede navegar entre categorías
+- Agregar productos al carrito de compras
+- Modificar cantidades de un producto antes de agregarlo al carrito de compras
+- Modificar cantidades de un producto estando en el carrito de compra
+- Borrar un producto del carrito
+- Vaciar el carrito de compras
+- Completar un formulario para finalizar la compra
+- Mostrar un numero de orden por compra finalizada
 
--Componentes
+### Demo
+Versión demo del proyecto [aquí](https://la-puerta-de-japon.netlify.app/)
 
-NavBar: se renderiza junto a CartWidget, es la barra de navegacion del sitio. Utiliza React Bootstrap
+### Construido con:
+- *Html5*
+- *Css3*
+- *Javascript*
+- *ReactJS*
+- *Firebase*
 
-CartWidget: botón con la imagen de un carrito, se utilizó react-icons para que renderice el carrito elegido "io5"
+### Librerías
+| Nombre | Descripción |
+| ------ | ------ |
+| Bootstrap | *Se utilizó para dar estilos* |
+| React icons | *Importación de iconos de React* |
+| React Bootstrap |*Se utilizaron componentes de React Bs, por ej: Containers y Cards* |
+| React Router Dom | *Enrutado de direcciones* |
+| Firebase | *Utilizado como base de datos de productos y ordenes*|
 
-Item: recibe por prop un objeto item, luego hago destructuring para poder utilizarlo de forma mas sencilla en la "card" que genere para renderizarlo. 
+### Dependencias
+```
+    "bootstrap": "^5.1.0",
+    "bootstrap-icons": "^1.5.0",
+    "firebase": "^8.9.1",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-beta.6",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.1.2"
+```
+### Versionado
+Se utilizó [GitHub](https://github.com/) para el versionado del proyecto
 
-ItemCount: este componente recibe por prop un valor de stock, al momento de intentar superar ese stock no se lo permite al usuario.
+### Observaciones
+Versión no optimizada para dispositivos móviles.
 
-ItemDetail: utilicé los componentes de react-bootstrap para renderizar los detalles. se agrega el itemcount en el cuerpo del detalle para que se visualice los botones de - o + y agregar al carrito.Contiene la funcion onAdd que agrega items al carrito de compras, esta funcion se toma del useContext que creamos. Tanto la funcion como valores de stock e inicial los pasamos como props a Itemcount.
+### Autor
+**[Walter Javier Romero](https://www.linkedin.com/in/walter-romero-b0630176/)**
 
-ItemDetailContainer: con useParams se toma el valor del item que se esta intentando buscar. Luego con useffect se analiza la base de datos ficticia cargada en mock, comparando el item obtenido con params, si tenemos un valor definido lo buscamos dentro del array mock utilizando un filter, luego lo seteamos con setUnItem (guarda el valor del item buscado como un objeto), en caso de no encontrar el item que nos solicitaron, devuelve todo el array de esa categoria. Se comprueba tambien que de existir el item que estan solicitando se renderice correctamente a travez de ItemDetail. Si no existe no renderiza un objeto indefinido.
-
-ItemList: Es un contendor de items. Por medio de una prop items, se renderizan todos los objetos que se pasan al componente Item. En este caso mostrará todos los items encontrados de una categoria.
-
-ItemListContainer: componente contenedor de todas las categorias, si necesitamos encontrar una categoria en especial la obtenemos por medio de useParams, el valor lo pasamos desde app.js por "/categoria/:idCategoria". Se simula una espera de 2 segundos, mientras se visualiza la leyenda "por favor espere". Si no tenemos una categoria que buscar el contenedor devuelve/muestra todos los item dentro de la base de datos.
-
-TituloCategorias: se muestra como titulo h2 la categoria que es capturada por useParams, la categoria se obtiene desde "/categoria/:idCategoria" en app.js
-
-CartContext: Este componente es el encargado de guardar los items que se seleccionan, por medio de useContext compartimos el contexto con el resto de los componentes, los items se guardan con "cartList" que es utilizado con useState, en cada posicion del array se guarda un objeto item y su cantidad. Este array es donde se agregan y se borran (luego se modificaran) los items del carrito de compras. Se crea la funcion addToCart, es la encargada de agregar items al cartList cuando el usuario presiona "agregar al carrito" del itemCount. 
-->AddToCartrecibe un objeto, dentro tiene un item y su cantidad. Utiliza un find index para buscar en el posicion del array se encuentra el item.id que estamos buscando.
-Si no lo encuentra retorna un -1, significa que no encontró el id que le enviamos (id es unico, por eso se busca) y le agrega al array el item y su cantidad. En caso de encontrar el id, primero, se crea un array auxiliar que contiene los valores de cartList, luego se ingresa a la posicion que obtuvimos anteriormente con findindex (cartList[posicionEncontradaConfindIndex]), ya que me devolvio en que posicion del array se encontraba el item.id que estabamos buscando. Ahora estando posicionados en el array sumamos en CANTIDAD la cantidad que ingreso como parametro (estaba en conjunto con el item, ingresaron juntas a la funcion como un objeto). 
-->ClearCart "borra" el array con los item guardados, internamente asigna un array vacio a cartList por medio de setCartList.
-->RemoveItem recibe un id que es el que se quiere borrar del carrito, esto se logra con filter. Ya que se genera un nuevo array filtrando el id, se compara por cada posicion del cartList su item.id guardado con el id que se recibió. Si cumple la condicion que no es el id que ingresamos lo guarda en cartList. Los items encontrados los "borra".
-
-Cart:recibe por context el cartList que es donde estan guardados todos los items seleccionados, tambien las funciones que manejaran los estados. Todo se renderiza utilizando reac-bootstrap. Detalle del item, su titulo, su precio que es el valor guardado unitario multiplicada la cantidad que se guardo en cartList. Fuera del renderizado de los items del carrito, tenemos un boton para vaciar el carrito (se activa clearCart del context. Si no tenemos productos en el carrito por medio de condicional muestra que no tenemos items guardados.
-
-
--Estilos:
-
-item.css:se genero un estilo para que las fotos tengan la misma altura en la vista de categorias
+[CoderHouse]:<data:image/png;base64,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> 
