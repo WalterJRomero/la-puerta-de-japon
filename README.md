@@ -1,7 +1,8 @@
 # La puerta de Japón
 ### _Proyecto Ecommerce, Coderhouse Camada 16935_
 
-[![N|Solid][CoderHouse]](https://www.coderhouse.com/)
+[![logo-coderhouse-3-bllxal.png](https://i.postimg.cc/Y0Pp44Xr/logo-coderhouse-3-bllxal.png)](https://www.coderhouse.com/)
+
 ### Descripción
 Esta página se diseñó con la temática de venta de servicios y productos sobre Japón. Se continuó el tema elegido en los cursos anteriores de [Desarrollo Web y Javascript]( https://walterjromero.github.io/La_puerta_de_Japon/ )
 
