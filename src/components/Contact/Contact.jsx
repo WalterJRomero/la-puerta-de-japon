@@ -24,11 +24,11 @@ function Contact() {
                     <Card.Body>                          
                         <Card.Text>
                             <AiFillLinkedin className="h4"/>                            
-                            <a href ="https://www.linkedin.com/in/walter-romero-b0630176/">Walter Romero</a>
+                            <a href ="https://www.linkedin.com/in/walter-romero-b0630176/" target="_blank" rel="noreferrer">Walter Romero</a>
                         </Card.Text>
                         <Card.Text>
                             <AiFillGithub className="h4"/>                            
-                            <a href ="https://github.com/WalterJRomero">Walter Romero</a>
+                            <a href ="https://github.com/WalterJRomero" target="_blank" rel="noreferrer">Walter Romero</a>
                         </Card.Text>
                     </Card.Body>
                 </Card>                  
